@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <limits>
 
 class Employee {
     private:
@@ -10,10 +11,17 @@ class Employee {
     public:
         // Конструктор за замовчуванням
         Employee() {
-            name = "None";
-            age = 0;
-            position = "None";
-            std::cout << "Employee created (default constructor)." << std::endl;
+            std::cout << "Enter employee's name: " << std::endl;
+            getline(std::cin, name);
+
+            std::cout << "Enter employee's age: " << std::endl;
+            std::cin >> age;
+
+            std::cout << "Enter employee's position: " << std::endl;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            getline(std::cin, position);
+
+            std::cout << "Employee created (default constructor)" << std::endl;
         }
 
         // Конструктор з параметрами
@@ -67,12 +75,15 @@ class Employee {
 
 int main() {
     // Створення екземплярів класу
+    Employee adam;
     Employee john("John", 28, "Manager");
     Employee bob("Bob", 34, "Accountant");
     Employee leah("Leah", 22, "Programmer");
 
     // Виведення інформації про співробітників
     std::cout << "\nEmployee Information:\n";
+    adam.print();
+    std::cout << std::endl;
     john.print();
     std::cout << std::endl;
     bob.print();
